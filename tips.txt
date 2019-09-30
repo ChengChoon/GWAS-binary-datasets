@@ -1,0 +1,35 @@
+The basic idea behind ploidy is that it gives you the lowest allele frequency you are interested in.
+
+-ploidy
+
+For pooled experiments this should be set to the number of samples in pool multiplied by individual sample ploidy.
+
+Number of individuals x ploidy level 
+
+For example, if you want to be able to capture alleles present in 10% of the cells in the colony, 
+then you would set your ploidy to 10. 
+
+If you want to go deeper, e.g. to 5%, you would set it to 20. 
+Note that GATK cannot currently go past a ploidy of 21 without some severe performance decay; 
+this is not a hard cap but an effective limitation due to some code inefficiencies.
+
+To calculate AF in 5% increments you would need to set the ploidy to 20.
+
+Exp: 
+
+AF in 50 % = ploidy 2
+AF in 25 % = ploidy 4
+AF in 5 % = ploidy 20
+
+UnifiedGenotyper, this tool has been deprecated in favor of 
+
+HaplotypeCaller, a much more sophisticated variant caller that produces much better calls, 
+especially on indels, and includes features that allow it to scale to much larger cohort sizes.
+
+If you add --max_num_PL_values 1000000 to your command, you will get calls in the final VCF from GenotypeGVCFs. 
+
+You may also try adding --max_genotype_count 1000000 to your command as well to include more possible genotypes.
+
+ --max_alternate_alleles also can try to adjust to higher values
+ 
+ 
