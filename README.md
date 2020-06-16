@@ -55,7 +55,7 @@ Run Picard to add read group into the bam files. Because GATK required read grou
 	java -jar picard.jar AddOrReplaceReadGroups \
 		I=R.sorted.bam \
 		O=R.sorted_RG.bam \
-     		RGLB= \
+		RGLB= \
 		RGPL= \
 		RGPU= \
 		RGSM=
