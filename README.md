@@ -41,7 +41,7 @@ Run Picard to add read group into the bam files. Because GATK required read grou
 
 	From the first line of FASTQ file, I can retrieve the read group information.
 	
-	zcat CH_H_2015_48_R1_paired.fq.gz | head -n 1
+	zcat R.fq.gz | head -n 1
 
 	@A00730:130:HJNTHDRXX:1:1101:1380:1031 1:N:0:GTAACATC+NAGCGATT
 
@@ -53,16 +53,16 @@ Run Picard to add read group into the bam files. Because GATK required read grou
 	RGPL = ILLUMINA
 	
 	java -jar picard.jar AddOrReplaceReadGroups \
-      	I=R.sorted.bam \
-      	O=R.sorted_RG.bam \
-     	RGLB= \
-	RGPL= \
-	RGPU= \
-	RGSM=
+		I=R.sorted.bam \
+		O=R.sorted_RG.bam \
+     		RGLB= \
+		RGPL= \
+		RGPU= \
+		RGSM=
 
 Run Picard to mark & remove duplicated reads
 
-	java -Xmx32G -XX:ParallelGCThreads=16 -jar picard.jar MarkDuplicates I=R.sorted.bam O=R.sorted.MD.bam M=R.sorted.MD.bam.metrics.txt OPTICAL_DUPLICATE_PIXEL_DISTANCE=2500 CREATE_INDEX=true TMP_DIR={create your own directory for temporary files} REMOVE_DUPLICATES=true
+	java -jar picard.jar MarkDuplicates I=R.sorted.bam O=R.sorted.MD.bam M=R.sorted.MD.bam.metrics.txt OPTICAL_DUPLICATE_PIXEL_DISTANCE=2500 CREATE_INDEX=true TMP_DIR={create your own directory for temporary files} REMOVE_DUPLICATES=true
 
 
 
