@@ -64,18 +64,19 @@ Run Picard to mark & remove duplicated reads
 
 	java -jar picard.jar MarkDuplicates I=R.sorted.bam O=R.sorted.MD.bam M=R.sorted.MD.bam.metrics.txt OPTICAL_DUPLICATE_PIXEL_DISTANCE=2500 CREATE_INDEX=true TMP_DIR={create your own directory for temporary files} REMOVE_DUPLICATES=true
 
-Run GATK HaplotypeCaller to create intermediate GVCF (not to be used in final analysis), which can then be used in GenotypeGVCFs for joint genotyping of multiple samples in a very efficient way 
+Run GATK HaplotypeCaller to create intermediate GVCF, which can then be used in GenotypeGVCFs for joint genotyping of multiple samples. 
 
-	java -jar -Xmx64G gatk.jar HaplotypeCaller -R ref.fasta -I R.sorted.RG.MD.bam -O R.sorted.RG.MD.g.vcf -ERC GVCF 
+	java -jar gatk.jar HaplotypeCaller -R ref.fasta -I R.sorted.RG.MD.bam -O R.sorted.RG.MD.g.vcf -ERC GVCF 
 
-To consolidate gvcf files, we can use GenomicsDBImport or CombineGVCFs. GenomicsDBImport is much recommended. The main advantage of using CombineGVCFs over GenomicsDBImport is the ability to combine multiple intervals at once without building a GenomicsDB. CombineGVCFs is slower than GenomicsDBImport though, so it is recommended CombineGVCFs only be used when there are few samples to merge.
-
-	The caveat of GenomicsDBImport is at least one interval must be provided, unless incrementally importing new samples in which case specified intervals are ignored in favor of intervals specified in the existing workspace. So I create a BED file generated form reference genome for a complete who;e genome interval list.
-
-	BED format, where intervals are in the form <chr> <start> <stop>, with fields separated by tabs.
+To consolidate gvcf files, we can use GenomicsDBImport or CombineGVCFs. GenomicsDBImport is much recommended. 
+The main advantage of using CombineGVCFs over GenomicsDBImport is the ability to combine multiple intervals at once without building a GenomicsDB. 
+CombineGVCFs is slower than GenomicsDBImport though, so it is recommended CombineGVCFs only be used when there are few samples to merge.
+The caveat of GenomicsDBImport is at least one interval must be provided, unless incrementally importing new samples in which case specified intervals are ignored in favor of intervals specified in the existing workspace. 
+So I create a BED file generated form reference genome for a complete who;e genome interval list.
+BED format, where intervals are in the form <chr> <start> <stop>, with fields separated by tabs.
 
 	samples=$(find . | sed 's/.\///' | grep -E 'g.vcf$' | sed 's/^/--variant /') # place sample paths into variable
-	path/to/gatk --java-options "-Xmx36G" CombineGVCFs \
+	gatk --java-options "-Xmx36G" CombineGVCFs \
        $(echo $samples) \
        -O path/to/combined.vcf \
        -R path/to/ref.fa
@@ -84,12 +85,12 @@ To consolidate gvcf files, we can use GenomicsDBImport or CombineGVCFs. Genomics
 	awk '{print $1 "\t0\t" $2}' ref.fna.fai > ref.fna.bed # make .bed file
 
 	samples=$(find . | sed 's/.\///' | grep -E 'g.vcf$' | sed 's/^/--variant /') # place sample paths into variable
-	path/to/gatk --java-options "-Xmx36G" GenomicsDBImport \
+	gatk --java-options "-Xmx36G" GenomicsDBImport \
           $(echo $samples)\
           --genomicsdb-workspace-path my_database \
           --intervals path/to/ref.fna.bed
 
- 	path/to/gatk --java-options "-Xmx36G" GenotypeGVCFs \
+ 	gatk --java-options "-Xmx36G" GenotypeGVCFs \
            -R path/to/ref.fna \
            -V gendb://path/to/my_database OR -V path/to/combined.vcf \
            -O path/to/genotypes.vcf
