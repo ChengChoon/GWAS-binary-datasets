@@ -72,7 +72,7 @@ To consolidate gvcf files, we can use GenomicsDBImport or CombineGVCFs. Genomics
 The main advantage of using CombineGVCFs over GenomicsDBImport is the ability to combine multiple intervals at once without building a GenomicsDB. 
 CombineGVCFs is slower than GenomicsDBImport though, so it is recommended CombineGVCFs only be used when there are few samples to merge.
 The caveat of GenomicsDBImport is at least one interval must be provided, unless incrementally importing new samples in which case specified intervals are ignored in favor of intervals specified in the existing workspace. 
-So I create a BED file generated form reference genome for a complete who;e genome interval list.
+So I create a BED file generated form reference genome for a complete whole genome interval list.
 BED format, where intervals are in the form <chr> <start> <stop>, with fields separated by tabs.
 
 	samples=$(find . | sed 's/.\///' | grep -E 'g.vcf$' | sed 's/^/--variant /') # place sample paths into variable
