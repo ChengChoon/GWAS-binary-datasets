@@ -99,15 +99,15 @@ BED format, where intervals are in the form <chr> <start> <stop>, with fields se
 
 run GATK SelectVariants to only work with SNPs
 
-	gatk SelectVariants -R ../../Reference/29082016_Xinb3_ref.fasta -V 73C.vcf.gz -select-type SNP -O 73C_SNP.vcf.gz
+	gatk SelectVariants -R ref.fasta -V 73C.vcf.gz -select-type SNP -O 73C_SNP.vcf.gz
 
 run GATK VariantFiltration to follow the basic hard-filter setting. I also included genotypes filter to remove GQ < 20. I run --missing-values-evaluate-as-failing in which missing values will be considered failing the expression and subsequently filtered.
 
-	gatk VariantFiltration -R ../../Reference/29082016_Xinb3_ref.fasta -V 73C_SNP.vcf.gz -filter "QD < 2.0" --filter-name "QD2" -filter "QUAL < 30.0" --filter-name "QUAL30" -filter "SOR > 3.0" --filter-name "SOR3" -filter "FS > 60.0" --filter-name "FS60" -filter "MQ < 40.0" --filter-name "MQ40" -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8" --missing-values-evaluate-as-failing -G-filter "GQ < 20.0" -G-filter-name "GQ20" -O 73C_SNP_filter.vcf.gz
+	gatk VariantFiltration -R ref.fasta -V 73C_SNP.vcf.gz -filter "QD < 2.0" --filter-name "QD2" -filter "QUAL < 30.0" --filter-name "QUAL30" -filter "SOR > 3.0" --filter-name "SOR3" -filter "FS > 60.0" --filter-name "FS60" -filter "MQ < 40.0" --filter-name "MQ40" -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8" --missing-values-evaluate-as-failing -G-filter "GQ < 20.0" -G-filter-name "GQ20" -O 73C_SNP_filter.vcf.gz
 
 run GATK SelectVariants again to exclude all filtered sites.
 
-	gatk SelectVariants -R ../../Reference/29082016_Xinb3_ref.fasta -V 73C_SNP_filter.vcf.gz --exclude-filtered -O 73C_SNP_filter_exclude.vcf.gz
+	gatk SelectVariants -R ref.fasta -V 73C_SNP_filter.vcf.gz --exclude-filtered -O 73C_SNP_filter_exclude.vcf.gz
 
 To compare all the vcf files if the filtering process is working or not, I choose VT program. 
 
