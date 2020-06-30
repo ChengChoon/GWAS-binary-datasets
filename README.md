@@ -133,8 +133,8 @@ Next, we check column 8 = "INFO" contained the information related to hard-filte
 
 I used a script (forplot_INFO.sh) to generate the input file for plotting in Rscript (73C_INFO.R).
 
-
-
-FORMAT
+Next I looked at sample or genotype level filters. At column 9 = "FORMAT" will describe what are the information format: {GT:AD:DP:FT:GQ:PL} and the following columns will be the sample representatives. For more info about the format means, check the link below:
+ 
+	https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format
 
 
