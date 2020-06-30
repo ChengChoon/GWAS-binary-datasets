@@ -123,4 +123,18 @@ To compare all the vcf files if the filtering process is working or not, I choos
  	#you can test the build
  	4. make test
 
+After all the filtering, we wanna check the output from the filtering steps. The first to look at column 7 = "FILTER" in which all SNPs should have "PASS".
+
+	awk '{print $7}' 73C_SNP_filter_exclude_nohead.vcf.gz | sort | uniq > filter_flag_uniq_73C
+
+Next, we check column 8 = "INFO" contained the information related to hard-filtering that we applied.
+
+	AC AF AN BaseQRankSum DP ExcessHet FS InbreedingCoeff MLEAC MLEAF MQ MQRankSum QD ReadPosRankSum SOR
+
+I used a script (forplot_INFO.sh) to generate the input file for plotting in Rscript (73C_INFO.R).
+
+
+
+FORMAT
+
 
