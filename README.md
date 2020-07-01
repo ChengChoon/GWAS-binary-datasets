@@ -125,7 +125,7 @@ To compare all the vcf files if the filtering process is working or not, I choos
 
 Remove line started with "##"
 
-	zgrep "^##" -v input.vcf.gz > out.vcf
+	zgrep -v "^##" input.vcf.gz > out.vcf
 
 After all the filtering, we wanna check the output from the filtering steps. The first to look at column 7 = "FILTER" in which all SNPs should have "PASS".
 
