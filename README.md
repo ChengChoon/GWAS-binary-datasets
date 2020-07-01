@@ -123,6 +123,10 @@ To compare all the vcf files if the filtering process is working or not, I choos
  	#you can test the build
  	4. make test
 
+Remove line started with "##"
+
+	zgrep "^##" -v input.vcf.gz > out.vcf
+
 After all the filtering, we wanna check the output from the filtering steps. The first to look at column 7 = "FILTER" in which all SNPs should have "PASS".
 
 	awk '{print $7}' input_SNP_filter_exclude_nohead.vcf.gz | sort | uniq > filter_flag_uniq_input
