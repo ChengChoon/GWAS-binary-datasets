@@ -143,9 +143,13 @@ Next I looked at sample or genotype level filters. At column 9 = "FORMAT" will d
 
 I have a python script check_AD.py to look at the AD field with your threshold value.
 
-I run vcftools to check the number of missing sites per samples and generate output=out.imiss. Let's examine the "F_MISS" and plot a histogram on it. I allowed maximum 10 % of missing genotypes prior to imputation as suggested by Marchini & Howie (2010) for better prediction of genotype at 2 to 3 % error rate.
+To QC on the sample quality, I run vcftools to check the number of missing sites per samples and generate output=out.imiss. Let's examine the "F_MISS" and plot a histogram on it.
 
         vcftools --vcf input.vcf --missing-indv
+
+To filter the SNPs on the genotype value, I applied a genotype call rate (90%) across all individuals to allow maximum 10 % of missing genotypes prior to imputation as suggested by Marchini & Howie (2010) for better prediction of genotype at 2 to 3 % error rate.
+
+	vcftools --vcf input.vcf --max-missing 0.90 --maf 0.05 --recode --recode-INFO-all --out
 
 Impute missing genotypes with beagle
 
