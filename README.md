@@ -145,15 +145,15 @@ I have a python script check_AD.py to look at the AD field with your threshold v
 
 Impute missing genotypes with beagle
 
-	java -jar beagle.18May20.d20.jar gt=../scicore/vcf/73C_BISNP_filter_exclude.vcf.gz out=73C_BISNP_filter_exclude_beagle.vcf.gz
+	java -jar beagle.18May20.d20.jar gt=input.vcf.gz out=out.vcf.gz
 
 Remove scaffold from the naming because plink don't take charcter indexing
 
-	zcat 73C_BISNP_filter_exclude_beagle.vcf.gz | sed -e 's/F|quiver//g' > 73C_BISNP_filter_exclude_beagle_name.vcf
+	zcat input.vcf.gz | sed -e 's/F|quiver//g' > output.vcf
 
 Generate plink files from vcf, which you can then use as an impute file for gemma
 
-	./plink2 --vcf 73C_BISNP_filter_exclude_beagle_noname.vcf --make-bed --out 73C_BISNP_filter_exclude_beagle_noname_plink --allow-extra-chr
+	./plink2 --vcf input.vcf --make-bed --out out_plink --allow-extra-chr
 
 I use vcftools to check the number of missing sites per samples. This will create an output called out.imiss. Let's examine the "F_MISS" and plot a histogram on it.
 
