@@ -143,6 +143,10 @@ Next I looked at sample or genotype level filters. At column 9 = "FORMAT" will d
 
 I have a python script check_AD.py to look at the AD field with your threshold value.
 
+I run vcftools to check the number of missing sites per samples and generate output=out.imiss. Let's examine the "F_MISS" and plot a histogram on it. I allowed maximum 10 % of missing genotypes prior to imputation as suggested by Marchini & Howie (2010) for better prediction of genotype at 2 to 3 % error rate.
+
+        vcftools --vcf input.vcf --missing-indv
+
 Impute missing genotypes with beagle
 
 	java -jar beagle.18May20.d20.jar gt=input.vcf.gz out=out.vcf.gz
@@ -155,7 +159,4 @@ Generate plink files from vcf, which you can then use as an impute file for gemm
 
 	./plink2 --vcf input.vcf --make-bed --out out_plink --allow-extra-chr
 
-I use vcftools to check the number of missing sites per samples. This will create an output called out.imiss. Let's examine the "F_MISS" and plot a histogram on it.
-
-	vcftools --vcf input.vcf --missing-indv
 
