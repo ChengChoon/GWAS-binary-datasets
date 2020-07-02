@@ -151,11 +151,11 @@ Impute missing genotypes with beagle
 
 	java -jar beagle.18May20.d20.jar gt=input.vcf.gz out=out.vcf.gz
 
-Remove scaffold from the naming because plink don't take charcter indexing
+Remove scaffold from the naming because plink don't take character indexing
 
 	zcat input.vcf.gz | sed -e 's/F|quiver//g' > output.vcf
 
-Generate plink files from vcf, which you can then use as an impute file for gemma
+Generate plink files from vcf, which you can then use as an input file for gemma
 
 	./plink2 --vcf input.vcf --make-bed --out out_plink --allow-extra-chr
 
