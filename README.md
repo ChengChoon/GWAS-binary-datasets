@@ -171,8 +171,9 @@ Use genesis (git clone https://github.com/shaze/genesis) for Population structur
 
 	java -XstartOnFirstThread -jar Genesis.jar
 
-Two input files need for genesis (i. compiled Eigenvectors with eigenvalues, ii. fam (the first two columns must uniquely identify the individuals (the first column is usually the family identifier, the second the individual identifier).  
+Two input files need for genesis a)compiled Eigenvectors with eigenvalues b)fam file with first two columns must uniquely identify the individuals (the first column is usually the family identifier, the second the individual identifier) population level information is available in subsequent columns. 
 
+Alternatively, can use ADMIXTURE to estimate population structure. Please refer to admixture_script.sh and followed by bestK.sh to find the best K values.
 
 
 
