@@ -165,13 +165,14 @@ Generate plink files from vcf, which you can then use as an input file for gemma
 
 Population stratification using --pca from plink. Two output files: Eigenvectors and eigenvalues. Change the top row or header in Eigenvectors with eigenvalues.
 
-	./plink2 --bfile 73C_BISNP_filter_exclude_filtered_beagle_name_plink --pca --out OUT --allow-extra-chr
+	./plink2 --bfile input --pca --out output --allow-extra-chr
 
 Use genesis (git clone https://github.com/shaze/genesis) for Population structure and PCA viewer. The Genesis.jar file which requires Java 1.7 or 1.8. Run the program in Mac machine:
 
 	java -XstartOnFirstThread -jar Genesis.jar
 
-And like this on Windows/Linux
+Two input files need for genesis (i. compiled Eigenvectors with eigenvalues, ii. fam (the first two columns must uniquely identify the individuals (the first column is usually the family identifier, the second the individual identifier).  
 
-	java -jar Genesis.jar
+
+
 
