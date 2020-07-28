@@ -157,7 +157,7 @@ Impute missing genotypes with beagle
 
 Remove scaffold from the naming because plink don't take character indexing
 
-	zcat input.vcf.gz | sed -e 's/F|quiver//g' > output.vcf
+	zcat input.vcf.gz | sed -e 's/F|quiver//g' -e 's/|quiver//g' > output.vcf
 
 Generate plink files from vcf, which you can then use as an input file for gemma
 
@@ -175,5 +175,31 @@ Two input files need for genesis a)compiled Eigenvectors with eigenvalues b)fam 
 
 Alternatively, can use ADMIXTURE to estimate population structure. Please refer to admixture_script.sh and followed by bestK.sh to find the best K values.
 
+	grep -h CV log*out > CV.txt
+	
+Another alternative tutorial for GWAS analysis: https://github.com/MareesAT/GWA_tutorial
 
+I have summarize a script for all the necessary steps in: subset.sh
+
+In case if we need to exclude some samples:
+	
+	gatk SelectVariants -R ref.fa -V input.vcf --exclude-sample-name sampleID -O output.vcf.gz
+
+For ASSOCIATION test: I use GEMMA:
+
+### linear mix-model
+# calculate relatedness matrix, I choose -gk "1" which calculates for centered relatedness matrix because it provides better control for population structure in lower organisms
+	gemma -bfile ${1} -gk 1 -o ${1}
+
+# -lm [num] -lm 1 performs Wald test, -lm 2 performs likelihood ratio test, -lm 3 performs score test, and -lm 4 performs all the three tests, -maf: minor allele frequency & -miss: missingness
+	gemma -bfile ${1} -lmm 4 -k output/${1}.cXX.txt -maf 0.05 -miss 0.1 -o ${1}_lmm	
+
+We can plot manhanttan plot using qqman from R package or my own Rscript = file_pub.R
+
+To rearrange the scaffolds into chromosome or LG groups. Please use forward.sh, reverse.sh, script.sh.
+
+
+
+
+ 
 
