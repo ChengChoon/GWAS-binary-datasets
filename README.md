@@ -198,6 +198,10 @@ We can plot manhanttan plot using qqman from R package or my own Rscript = file_
 
 To rearrange the scaffolds into chromosome or LG groups. Please use forward.sh, reverse.sh, script.sh.
 
+ALTERNATIVE https://github.com/jiabowang/GAPIT3
+
+
+
 
 
 
