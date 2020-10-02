@@ -191,8 +191,10 @@ For ASSOCIATION test: I use GEMMA:
 	# calculate relatedness matrix, I choose -gk "1" which calculates for centered relatedness matrix because it provides better control for population structure in lower organisms
 	gemma -bfile ${1} -gk 1 -o ${1}
 
-	# -lm [num] -lm 1 performs Wald test, -lm 2 performs likelihood ratio test, -lm 3 performs score test, and -lm 4 performs all the three tests, -maf: minor allele frequency & -miss: missingness
+	# -lmm [num] -lmm 1 performs Wald test, -lmm 2 performs likelihood ratio test, -lmm 3 performs score test, and -lmm 4 performs all the three tests, -maf: minor allele frequency & -miss: missingness
 	gemma -bfile ${1} -lmm 4 -k output/${1}.cXX.txt -maf 0.05 -miss 0.1 -o ${1}_lmm	
+
+	#In the case of low numbers of samples (phenotypes), a more stringent MAF filter on the SNPs is required.
 
 We can plot manhanttan plot using qqman from R package or my own Rscript = file_pub.R
 
