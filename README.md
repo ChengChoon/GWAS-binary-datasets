@@ -168,6 +168,8 @@ Population stratification using --pca from plink. Two output files: Eigenvectors
 	./plink2 --bfile input --pca --out output --allow-extra-chr
 
 Use genesis (git clone https://github.com/shaze/genesis) for Population structure and PCA viewer. The Genesis.jar file which requires Java 1.7 or 1.8. Run the program in Mac machine:
+	
+	export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_241`
 
 	java -XstartOnFirstThread -jar Genesis.jar
 
