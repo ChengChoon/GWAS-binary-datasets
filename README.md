@@ -1,5 +1,10 @@
 GWAS project
 --------------
+Generate the dictionary and index files for reference genome.
+
+	gatk CreateSequenceDictionary -R ref.fasta ### ref.dict
+
+	samtools faidx ref.fasta ### ref.fasta.fai
 
 Download the raw read FASTQ files from server.
 
