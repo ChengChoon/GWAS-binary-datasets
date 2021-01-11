@@ -106,6 +106,8 @@ GATK with bamout to show realigned read, only for specific areas where you want 
 
 	gatk HaplotypeCaller -R ref.fasta -I input.bam -O output.vcf.gz -bamout bamout.bam --bam-writer-type CALLED_HAPLOTYPES
 
+GATK to specifc intervals and interval lists	https://gatk.broadinstitute.org/hc/en-us/articles/360035531852-Intervals-and-interval-lists
+
 run GATK SelectVariants to only work with biallelic SNPs
 
 	gatk SelectVariants -R ref.fasta -V input.vcf.gz -select-type SNP --restrict-alleles-to BIALLELIC -O input_BISNP.vcf.gz
