@@ -208,7 +208,7 @@ For ASSOCIATION test: I use GEMMA:
 
 	#In the case of low numbers of samples (phenotypes), a more stringent MAF filter on the SNPs is required "-maf 0.4". Check https://gitlab.com/leoisl/dbgwas/-/issues/12
 
-We can plot manhanttan plot using qqman from R package or my own Rscript = file_pub.R
+We can plot manhanttan plot using qqman from R package
 
 To rearrange the scaffolds into chromosome or LG groups. Please use forward.sh, reverse.sh, script.sh.
 
