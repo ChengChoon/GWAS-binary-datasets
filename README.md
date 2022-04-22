@@ -215,9 +215,3 @@ To rearrange the scaffolds into chromosome or LG groups. Please use forward.sh, 
 ALTERNATIVE https://github.com/jiabowang/GAPIT3
 
 To plot manhattan plot, https://www.r-graph-gallery.com/101_Manhattan_plot.html
-
-test
-
-
- 
-
